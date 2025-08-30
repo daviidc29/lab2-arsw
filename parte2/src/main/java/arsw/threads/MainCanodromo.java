@@ -13,6 +13,8 @@ public class MainCanodromo {
 
     private static RegistroLlegada reg = new RegistroLlegada();
 
+    private static final PausaMonitor pausa = new PausaMonitor();
+
     public static void main(String[] args) {
         can = new Canodromo(17, 100);
         galgos = new Galgo[can.getNumCarriles()];
@@ -33,15 +35,27 @@ public class MainCanodromo {
                             public void run() {
                                 for (int i = 0; i < can.getNumCarriles(); i++) {
                                     //crea los hilos 'galgos'
-                                    galgos[i] = new Galgo(can.getCarril(i), "" + i, reg);
+                                    galgos[i] = new Galgo(can.getCarril(i), "" + i, reg,pausa);
                                     //inicia los hilos
                                     galgos[i].start();
 
                                 }
+                                try {
+                                    for(int i=0; i <can.getNumCarriles();i++){
+                                        galgos[i].join();
+
+                                    }
+                                } catch (Exception e) {
+                                    Thread.currentThread().interrupt();
+                                    return;
+                                }
                                
-				can.winnerDialog(reg.getGanador(),reg.getUltimaPosicionAlcanzada() - 1); 
+				            can.winnerDialog(reg.getGanador(),reg.getUltimaPosicionAlcanzada() - 1); 
                                 System.out.println("El ganador fue:" + reg.getGanador());
+                                ((JButton) e.getSource()).setEnabled(true);
+
                             }
+                            
                         }.start();
 
                     }
@@ -52,6 +66,7 @@ public class MainCanodromo {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        pausa.pausar();
                         System.out.println("Carrera pausada!");
                     }
                 }
@@ -61,6 +76,7 @@ public class MainCanodromo {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        pausa.continuar(); // notifyAll()
                         System.out.println("Carrera reanudada!");
                     }
                 }

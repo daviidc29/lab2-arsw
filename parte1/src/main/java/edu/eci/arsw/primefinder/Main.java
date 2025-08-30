@@ -1,20 +1,14 @@
 package edu.eci.arsw.primefinder;
 
+import java.util.List;
+
 public class Main {
 
 	public static void main(String[] args) {
-		
-		//PrimeFinderThread pft=new PrimeFinderThread(0, 2100000000);
+		List<Integer> primes = PrimeFinderThread.findPrimes(5, 0, 40000000);
+		System.out.println("Primos: " + primes);
+		System.out.println("Total primos: " + primes.size());
 
-		PrimeFinderThread pft1=new PrimeFinderThread(20,0, 19000000);
-		pft1.start();
-
-		
-
-
-		
-		
-		
 	}
 	
 }

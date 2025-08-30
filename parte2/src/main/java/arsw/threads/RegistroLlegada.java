@@ -6,22 +6,20 @@ public class RegistroLlegada {
 
 	private String ganador=null;
 	
-	public String getGanador() {
+	public synchronized int asignarPuesto(String nombreGalgo) {
+        int puesto = ultimaPosicionAlcanzada++;
+        if (puesto == 1) {
+            ganador = nombreGalgo;
+        }
+        return puesto;
+    }
+
+	public synchronized String getGanador() {
 		return ganador;
 	}
 
-	public void setGanador(String ganador) {
-		this.ganador = ganador;
-	}
-
-	public int getUltimaPosicionAlcanzada() {
+	public synchronized int getUltimaPosicionAlcanzada() {
 		return ultimaPosicionAlcanzada;
-	}
-
-	public void setUltimaPosicionAlcanzada(int ultimaPosicionAlcanzada) {
-		this.ultimaPosicionAlcanzada = ultimaPosicionAlcanzada;
-	}
-
-	
+	}	
 	
 }
