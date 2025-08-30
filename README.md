@@ -46,4 +46,9 @@ Encuentro que al ejecutarlo varias veces el puesto 1 se puede repetir varias vec
 
 ![alt text](img/media/img18.png)
 
-![alt text](image.png)
+![alt text](img/media/img19.png)
+
+Para lograr esto construimos una clase para pausar que va a permitir dormir todos los hilos y despertarlos sincronizadamente donde se le notifica a todos y todos esperan, en adicional lo añadimos en galgo para que esere y corra y en las funciones de continue o detengase de main
+
+![alt text](img/media/img20.png)
+
